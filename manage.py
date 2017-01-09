@@ -23,6 +23,7 @@ from flask_blog import app
 manager = Manager(app)
 
 # This sets the variables in order to connect the server
+# Manager allows runserver to be called directly from the command line
 manager.add_command('runserver', Server(
     use_debugger = True, # Remove at production
     use_reloader = True, # rreloads manager.py after any change
