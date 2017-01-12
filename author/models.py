@@ -15,6 +15,8 @@ class Author(db.Model):
         self.password = password
         self.is_author = is_author
         
+       
+        
     def __repr__(self):
         return '<Author {}>'.format(self.username)
     
