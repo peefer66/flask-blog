@@ -4,18 +4,21 @@ from blog.form import SetupForm
 from flask_blog import db
 from author.models import Author
 from blog.models import Blog
+from author.decorators import login_required
 
 @app.route('/')
 @app.route('/index')
 def index():
-    return 'Hello World'
-    
-@app.route('/admin')
-def admin():
     blogs = Blog.query.count()
     if blogs == 0:
         return redirect(url_for('setup'))
+    return "Welcome"
+    
+@app.route('/admin')
+@login_required
+def admin():
     return render_template('blog/admin.html')
+  
     
 @app.route('/setup', methods=('GET', 'POST'))
 def setup():
@@ -27,7 +30,8 @@ def setup():
             form.email.data,
             form.username.data,
             form.password.data,
-            form.confirm.data
+            form.confirm.data,
+            True
             )
             
         db.session.add(author)

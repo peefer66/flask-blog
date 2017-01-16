@@ -17,10 +17,13 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
 # commands that can be called from the command line to a Manager instance:
 
 from flask.ext.script import Manager, Server
+from flask.ext.migrate import MigrateCommand
 from flask_blog import app
 
 
+
 manager = Manager(app)
+manager.add_command('db', MigrateCommand)
 
 # This sets the variables in order to connect the server
 # Manager allows runserver to be called directly from the command line
